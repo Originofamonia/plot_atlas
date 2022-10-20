@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-Created on Sun Apr 26 12:42:26 2020
-
-@author: ning
+plot brain regions
 """
 
 import os
@@ -18,10 +15,9 @@ import seaborn as sns
 sns.set_context('poster')
 from typing import List
 
+
 def create_mesh(mask_list:List,stat_mesh:str,radius:int = 2,kind:str = 'line',) -> np.ndarray:
     """
-    
-
     Parameters
     ----------
     mask_list : List
