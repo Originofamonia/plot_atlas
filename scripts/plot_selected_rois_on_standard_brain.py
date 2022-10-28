@@ -153,8 +153,8 @@ ax.legend(handles,
            borderaxespad = 1,
            frameon = False,
            )
-fig.savefig(os.path.join(fig_dir,f'{name_to_save}.jpeg'),
-            dpi = 400,
+fig.savefig(os.path.join(fig_dir,f'{name_to_save}.png'),
+            # dpi = 400,
             bbox_inches = 'tight',)
 #fig.savefig(os.path.join('../../properties_of_unconscious_processing/figures','ROIs.jpeg'),
 #            dpi = 400,

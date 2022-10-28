@@ -152,7 +152,7 @@ ax.legend(handles,
            frameon = False,
            )
 fig.savefig(os.path.join(collect_dir,
-                          'supfigure17.eps'),
+                          'supfigure17.png'),
             dpi = 300,
             bbox_inches = 'tight')
 

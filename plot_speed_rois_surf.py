@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov 23 18:10:45 2021
-
-@author: ning
+plot selected ROIs on surf
+TODO: 5个ROI画在一个脑图里面 然后边界画出来 然后不同 subtype 用不同的cmap
 """
 import numpy as np
 from nilearn import datasets,plotting,surface,input_data
@@ -73,7 +72,7 @@ ventrolateralPFC""".split('\n')
     cmap = ListedColormap(color_list)
 
     map_data = masker.transform(maps)
-    new_map = np.zeros(map_data.shape)
+    new_map = np.zeros(map_data.shape)  # make 2 of this for left/right
     reference = dict()
     handles, labels = [],[]
     for ii,((roi_native,roi_harvard),color,mask_name) in enumerate(zip(
@@ -145,7 +144,7 @@ ventrolateralPFC""".split('\n')
             loc = 'center right',
             bbox_to_anchor = (1.5,0.5),)
 
-    fig.savefig(f'outputs/script_from_atlas.png', bbox_inches = 'tight')
+    fig.savefig(f'outputs/roi_surf.png', bbox_inches = 'tight')
 
 
 if __name__ == '__main__':

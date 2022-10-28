@@ -3,9 +3,8 @@ https://nilearn.github.io/stable/auto_examples/01_plotting/plot_atlas.html#sphx-
 https://nilearn.github.io/dev/auto_examples/01_plotting/plot_3d_map_to_surface_projection.html
 """
 import os
-from nilearn import datasets
-from nilearn import plotting
-from nilearn import surface
+from nilearn import datasets, plotting,surface
+from nibabel import load
 import numpy as np
 
 
@@ -17,10 +16,10 @@ def main():
     fsaverage = datasets.fetch_surf_fsaverage()
     # Sample the 3D data around each node of the mesh
     texture = surface.vol_to_surf(stat_img, fsaverage.pial_right)
-    # destrieux_atlas = datasets.fetch_atlas_surf_destrieux()
-    destrieux_atlas = datasets.fetch_atlas_destrieux_2009()
-    # parcellation = destrieux_atlas['map_right']
-    parcellation = destrieux_atlas['maps']
+    destrieux_atlas = datasets.fetch_atlas_surf_destrieux()
+    parcellation = destrieux_atlas['map_right']
+    # destrieux_atlas = datasets.fetch_atlas_destrieux_2009()
+    # parcellation = destrieux_atlas['maps']
 
     # these are the regions we want to outline
     regions_dict = {b'G_postcentral': 'Postcentral gyrus',
