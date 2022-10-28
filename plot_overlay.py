@@ -78,7 +78,8 @@ def main():
     # to plot the selected nodes in one step.
     #
     # Unlike :func:`nilearn.plotting.plot_stat_map` this works with 4D images
-
+    
+    # for idx in roi_indices:
     dmn_nodes = image.index_img(atlas_filename, roi_indices)
     # Note that dmn_node is now a 4D image
     print(dmn_nodes.shape)
@@ -86,6 +87,7 @@ def main():
 
     display = plotting.plot_prob_atlas(dmn_nodes,
                                     cut_coords=(0, -55, 29),
+                                    alpha=1,
                                     # title="DMN nodes in MSDL atlas"
                                     )
     display.savefig(f'outputs/plot_overlay2.png')
