@@ -1,0 +1,7 @@
+LeftPrecentral
+RightLateralOrbitofrontal
+RightPrecentral
+LeftParacentral
+LeftPostcentral
+RightTemporalPole
+RightTransverseTemporal

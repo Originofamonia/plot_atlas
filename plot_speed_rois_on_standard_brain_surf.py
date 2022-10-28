@@ -5,7 +5,7 @@ plot brain regions
 import os
 import numpy as np
 from glob import glob
-from nilearn import image,plotting
+from nilearn import image,plotting, datasets
 from nilearn.surface import vol_to_surf
 from nilearn.datasets import fetch_surf_fsaverage
 from matplotlib import pyplot as plt
@@ -55,27 +55,31 @@ def main():
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     #dataset = datasets.fetch_atlas_craddock_2012('../data')
-    roi_names = """fusiform
-inferiorparietal
-inferiortemporal
-lateraloccipital
-lingual
-middlefrontal
-parahippocampal
-pericalcarine
-precuneus
-superiorfrontal
-superiorparietal
-ventrolateralPFC""".split('\n')
+#     roi_names = """fusiform
+# inferiorparietal
+# inferiortemporal
+# lateraloccipital
+# lingual
+# middlefrontal
+# parahippocampal
+# pericalcarine
+# precuneus
+# superiorfrontal
+# superiorparietal
+# ventrolateralPFC""".split('\n')
+    with open(f'data/speed_rois.txt', 'r') as f:
+        roi_names = f.read().splitlines()
+        print(roi_names)
     
     #parsorbitalis
     #parstriangularis
     #parsopercularis
-    
+    # Get a cortical mesh
     fsaverage = fetch_surf_fsaverage('fsaverage')
 
     # the_brain = f'{data_dir}/MNI152_T1_2mm_brain.nii.gz'
     the_mask = f'{data_dir}/MNI152_T1_2mm_brain_mask_dil.nii.gz'
+    atlas = datasets.fetch_atlas_destrieux_2009()
     # get the standard ROIs
     masks = np.sort(glob(os.path.join(data_dir,'*standard*')))
     #masks = [item for item in glob(os.path.join(data_dir,'*.nii.gz')) if ('BOLD' not in item) and ('fsl' not in item) and ('standard' not in item) and ('MNI152' not in item)]
@@ -85,23 +89,17 @@ ventrolateralPFC""".split('\n')
 
     # list of the ROIs I want to plot
     name_map = {
-            'fusiform':'Fusiform gyrus',
-            'inferiorparietal':'Inferior parietal lobe',
-            'inferiortemporal':'Inferior temporal lobe',
-            'lateraloccipital':'Lateral occipital cortex',
-            'lingual':'Lingual',
-            'middlefrontal':'Middle frontal gyrus',
-            'parahippocampal':'Parahippocampal gyrus',
-            'parahippocampal':'Parahippocampal gyrus',
-            'pericalcarine':'Pericalcarine cortex',
-            'precuneus':'Precuneus',
-            'superiorfrontal':'Superior frontal gyrus',
-            'superiorparietal':'Superior parietal gyrus',
-            'ventrolateralPFC':'Inferior frontal gyrus',
+            'LeftPrecentral':( 29, 'L G_precentral'),
+            'RightLateralOrbitofrontal':( 88, 'R G_front_inf-Orbital'),
+            'LeftParacentral':(  3, 'L G_and_S_paracentral'),
+            'RightPrecentral':(104, 'R G_precentral'),
+            'LeftPostcentral':( 28, 'L G_postcentral'),
+            'RightTemporalPole':(119, 'R Pole_temporal'),
+            'RightTransverseTemporal':(150, 'R S_temporal_transverse'),
             }
     # figur ename 
     figure_name = 'ROI_surf.jpg'
-    
+
     #plt.close('all')
     handles, labels = [],[]
     # create a list of colors for the rois
@@ -114,7 +112,7 @@ ventrolateralPFC""".split('\n')
     
     import matplotlib.colors as mcolors
     colors = list(mcolors.CSS4_COLORS.keys())[:len(roi_names)]
-    
+
     # for color checking
     mask_items = []
     left_masks = []
@@ -160,7 +158,7 @@ ventrolateralPFC""".split('\n')
                         map_left=left_mesh,
                         map_right=right_mesh,
                         )
-    
+
     fig,ax = plt.subplots(figsize = (6*2,5*2),
                           nrows = 2,
                           ncols = 2,

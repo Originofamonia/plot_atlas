@@ -146,7 +146,7 @@ ventrolateralPFC""".split('\n')
         # for color checking
         reference[ii+1] = mask_name
         # create the legend handles and labels for plotting
-        handles.append(Patch(facecolor = color))
+        handles.append(Patch(facecolor=color))
         
         labels.append(mask_name)
     
