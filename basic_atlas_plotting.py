@@ -17,7 +17,7 @@ def main():
     # Sample the 3D data around each node of the mesh
     texture = surface.vol_to_surf(stat_img, fsaverage.pial_right)
     destrieux_atlas = datasets.fetch_atlas_surf_destrieux()
-    parcellation = destrieux_atlas['map_right']
+    parcellation = destrieux_atlas['map_right']  # [10242]
     # destrieux_atlas = datasets.fetch_atlas_destrieux_2009()
     # parcellation = destrieux_atlas['maps']
 
@@ -27,7 +27,7 @@ def main():
 
     # get indices in atlas for these labels
     regions_indices = [np.where(np.array(destrieux_atlas['labels']) == region)[0][0]
-                    for region in regions_dict]
+                    for region in regions_dict]  # region is key of dict
 
     labels = list(regions_dict.values())
 
